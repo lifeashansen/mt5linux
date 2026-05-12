@@ -2823,7 +2823,7 @@ class MetaTrader5(object):
 
 
         """
-        code = f"mt5.order_check({request})"
+        code = f"mt5.order_check({request!r})"
         return self.__conn.eval(code)
 
     def order_send(self, request):
