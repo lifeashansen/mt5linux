@@ -1,1 +1,9 @@
-"""\n#!/usr/bin/env python\n\n# Code from: https://github.com/tomerfiliba-org/rpyc\n    \nclassic rpyc server (threaded, forking or std) running a SlaveService\nusage:\n    rpyc_classic.py                         # default settings\n    rpyc_classic.py -m forking -p 12345     # custom settings\n\n    # ssl-authenticated server (keyfile and certfile are required)\n    rpyc_classic.py --ssl-keyfile keyfile.pem --ssl-certfile certfile.pem --ssl-cafile cafile.pem\n"""\n\nimport sys\nimport os\nimport rpyc\nfrom plumbum import cli\nfrom rpyc.utils.server import ThreadedServer, ForkingServer, OneShotServer\nfrom rpyc.utils.classic import DEFAULT_SERVER_PORT, DEFAULT_SERVER_SSL_PORT\nfrom rpyc.utils.registry import REGISTRY_PORT\nfrom rpyc.utils.registry import UDPRegistryClient, TCPRegistryClient\nfrom rpyc.utils.authenticators import SSLAuthenticator\nfrom rpyc.lib import setup_logger\nfrom rpyc.core import SlaveService\nfrom rpyc.core.async_ import TimeoutError as RpycTimeoutError\n\nclass ClassicServer(cli.Application):\n    mode = cli.SwitchAttr(\n        ["-m", "--mode"],\n        cli.Set("threaded", "forking", "stdio", "oneshot"),\n        default="threaded",\n        help="The serving mode (threaded, forking, or 'stdio' for \
+"""Command-line entrypoint for the mt5linux RPyC classic server."""
+
+from __future__ import annotations
+
+from rpyc.cli.rpyc_classic import ClassicServer
+
+
+if __name__ == "__main__":
+    ClassicServer.run()
